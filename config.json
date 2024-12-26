@@ -1,0 +1,10 @@
+{
+    "shop": {
+        "id": 18,
+        "address": "МО г. Красногорск, ул. Ленина, д. 35А, ТЦ «Солнечный рай»"
+    },
+    "max_threading": 100,
+    "parsing_type": "full",
+    "categories_ids": [95]
+}
+

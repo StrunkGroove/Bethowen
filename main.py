@@ -3,6 +3,7 @@ import random
 import time
 import itertools
 import csv
+import json
 
 from urllib.parse import urljoin
 from typing import Any, Union
@@ -24,6 +25,7 @@ r = redis.Redis(
 
 BASE_URL = "https://www.bethowen.ru/"
 FILENAME = "products.csv"
+CONFIG = "config.json"
 
 max_threading = 10
 total_parsed_categories = 0
@@ -252,14 +254,7 @@ def parse(config_data: dict):
         parse_by_categories(shop, categories_ids)
 
 
-parse(
-    {
-        "shop": {
-            "id": 18,
-            "address": "МО г. Красногорск, ул. Ленина, д. 35А, ТЦ «Солнечный рай»",
-        },
-        "max_threading": 100,
-        "parsing_type": "full",
-        "categories_ids": [95],
-    }
-)
+if __name__ == "__main__":
+    with open(CONFIG, "r") as config_file:
+        config = json.load(config_file)
+    parse(config)
