@@ -36,9 +36,9 @@ http_proxies = list(r.smembers(config("HTTP_PROXIES_KEY")))
 def get_data(url: str, method="get", **kwargs) -> Any:
     attempt, max_attempts = 1, 5
     while attempt <= max_attempts:
+        proxy = random.choice(http_proxies)
+        proxies = {"http://": f"http://{proxy}"}
         try:
-            proxy = random.choice(http_proxies)
-            proxies = {"http://": f"http://{proxy}"}
             response = requests.request(method, url, proxies=proxies, **kwargs)
             return response.json()
         except Exception as e:
